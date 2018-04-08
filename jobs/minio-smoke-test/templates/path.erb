@@ -1,0 +1,11 @@
+#!/bin/bash
+JOBNAME="minio-smoke-test"
+
+RUN_DIR=/var/vcap/sys/run/$JOBNAME
+LOG_DIR=/var/vcap/sys/log/$JOBNAME
+
+JOB_DIR=/var/vcap/jobs/$JOBNAME
+BIN_DIR=/var/vcap/packages/minio-client
+
+mkdir -p ${RUN_DIR} ${LOG_DIR} ${CONFIG_DIR} ${DATA_DIR}
+chown -R vcap:vcap $RUN_DIR $LOG_DIR $CONFIG_DIR ${DATA_DIR}

@@ -1,0 +1,7 @@
+---
+name: minio-client
+
+dependencies: []
+
+files:
+- minio-client/mc

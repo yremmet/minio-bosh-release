@@ -1,0 +1,14 @@
+#!/bin/bash
+JOBNAME="minio"
+
+RUN_DIR=/var/vcap/sys/run/$JOBNAME
+LOG_DIR=/var/vcap/sys/log/$JOBNAME
+STORE_DIR=/var/vcap/store
+DATA_DIR=${STORE_DIR}/$JOBNAME
+PIDFILE=${RUN_DIR}/pid
+
+JOB_DIR=/var/vcap/jobs/$JOBNAME
+BIN_DIR=/var/vcap/packages/$JOBNAME
+
+mkdir -p ${RUN_DIR} ${LOG_DIR} ${CONFIG_DIR} ${DATA_DIR}
+chown -R vcap:vcap $RUN_DIR $LOG_DIR $CONFIG_DIR ${DATA_DIR}

@@ -1,0 +1,5 @@
+#!/bin/bash
+set -e
+
+cp -a minio-client/mc ${BOSH_INSTALL_TARGET}
+chmod +x ${BOSH_INSTALL_TARGET}/mc

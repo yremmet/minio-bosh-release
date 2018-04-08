@@ -1,0 +1,57 @@
+---
+name: minio
+
+releases:
+- name: osb-minio
+  version: latest
+
+stemcells:
+- alias: default
+  os: ubuntu-trusty
+  version: latest
+
+instance_groups:
+- name: minio
+  instances: 4
+  jobs:
+  - name: minio
+    release: osb-minio
+    properties:
+      credential:
+        accesskey: ((minio_access_key))
+        secretkey: ((minio_secret_key))
+      port: 9000
+  networks:
+  - name: default
+  vm_type: default
+  persistent_disk: 2048
+  stemcell: default
+
+- name: smoke-test
+  instances: 1
+  type: errand
+  jobs:
+  - name: minio-smoke-test
+    release: osb-minio
+    properties:
+      filesize: 1
+      credential:
+        accesskey: ((minio_access_key))
+        secretkey: ((minio_secret_key))
+  networks:
+  - name: default
+  vm_type: default
+  stemcell: default
+
+
+update:
+  canaries: 1
+  canary_watch_time: 1000-30000
+  update_watch_time: 1000-30000
+  max_in_flight: 10
+
+variables:
+- name: minio_access_key
+  type: password
+- name: minio_secret_key
+  type: password

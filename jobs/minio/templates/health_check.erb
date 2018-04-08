@@ -1,0 +1,5 @@
+#!/bin/sh
+
+
+http_status_code=$(curl -s -k -o /dev/null -I -w "%{http_code}" http://localhost:<%= p("port") %>/minio/index.html)
+[ "$http_status_code" = "200" ] || [ "$http_status_code" = "404" ]

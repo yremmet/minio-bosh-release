@@ -1,0 +1,21 @@
+#!/bin/bash
+
+set -e 
+
+source $(dirname $0)/../helpers/path
+
+<% link("minio").instances.each_with_index do | instance, index | %>
+    $BIN_DIR/mc config host add "minio-<%= index %>" http://<%= instance.address%>:<%= link("minio").p("port") %> <%= p("credential.accesskey") %> <%= p("credential.secretkey") %>
+    $BIN_DIR/mc mb minio-<%= index %>/smoke-test-<%= index %>
+<% end %>
+
+dd if=/dev/urandom of=testfile.tst bs=1k count=<%= p("filesize")*100000 %>
+
+<% link("minio").instances.each_with_index do | instance, index | %>
+    $BIN_DIR/mc cp testfile.tst minio-<%= index %>/smoke-test-<%= index %>/testfile.tst
+<% end %>
+
+<% link("minio").instances.each_with_index do | instance, index | %>
+    $BIN_DIR/mc rm minio-<%= index %>/smoke-test-<%= index %>/testfile.tst
+    $BIN_DIR/mc rm minio-<%= index %>/smoke-test-<%= index %>
+<% end %>

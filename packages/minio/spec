@@ -1,0 +1,7 @@
+---
+name: minio
+
+dependencies: []
+
+files:
+- minio/minio

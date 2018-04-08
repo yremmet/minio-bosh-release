@@ -1,0 +1,27 @@
+---
+name: minio-smoke-test
+templates:
+  run.erb: bin/run
+  path.erb: helpers/path
+packages:
+- minio-client
+
+consumes:
+- name: minio
+  type: minio
+
+
+properties:
+  filesize:
+    description: "Size of the testfile created. Defaults to 20 (around 2G)"
+    default: 20
+  credential.accesskey:
+    description: "The access key the server should accept"
+  credential.secretkey:
+    description: "The secret key the server should accept"
+  region:
+    description: "The region the server should claim to be part of."
+    default: ""
+  port:
+    description: "The port on which the Minio server should bind"
+    default: 9000
