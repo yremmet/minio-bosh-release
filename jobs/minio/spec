@@ -18,6 +18,7 @@ provides:
   type: minio
   properties:
   - port
+  - region
 
 properties:
   credential.accesskey:
@@ -33,3 +34,19 @@ properties:
   logging.level:
     description: "The logging level which the minio server is running with"
     default: "error"
+  webhook.enable:
+    description: "Set to true to enable webhook.  Defaults to false"
+    default: "false"
+  webhook.endpoint:
+    description: "Webhook endpoint"
+    default: ""
+  storage_class.standard:
+    description: "Set the storage class for standard storage. 
+     Value for standard storage class. It should be in the format EC:Parity, for example to set 4 disk parity for standard storage class objects, set this field to EC:4.
+     It the parity MUST be bigger than for the reduced redudancy setting. By default, parity for objects with standard storage class is set to N/2, and parity for objects with reduced redundancy storage class objects is set to 2."
+    default: ""
+  storage_class.reduced_redudancy:
+    default: ""
+    description: "Set the storage class for reduced redudancy storage. 
+     Value for standard storage class. It should be in the format EC:Parity, for example to set 4 disk parity for standard storage class objects, set this field to EC:4.
+     It the parity MUST be smaller than for the standard setting."

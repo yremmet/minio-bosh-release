@@ -12,7 +12,7 @@ stemcells:
 
 instance_groups:
 - name: minio
-  instances: 4
+  instances: 16
   jobs:
   - name: minio
     release: osb-minio
@@ -21,6 +21,10 @@ instance_groups:
         accesskey: ((minio_access_key))
         secretkey: ((minio_secret_key))
       port: 9000
+      region: ((minio_region))
+      storage_class:
+        reduced_redudancy: EC:2
+        standard: EC:6
   networks:
   - name: default
   vm_type: default
@@ -29,7 +33,7 @@ instance_groups:
 
 - name: smoke-test
   instances: 1
-  type: errand
+  lifecycle: errand
   jobs:
   - name: minio-smoke-test
     release: osb-minio
