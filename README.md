@@ -1,4 +1,4 @@
 # BOSH Minio Release
 
-[Minio]  Object Storage Server. 
+Minio  Object Storage Server. 
 
